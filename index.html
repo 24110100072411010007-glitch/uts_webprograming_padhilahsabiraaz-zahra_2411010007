@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Operasi Matematika dengan JavaScript</title>
+  <style>
+    /* Reset & Styling Dasar */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    /* 1. Header */
+    header {
+      background-color: #00bcd4;
+      color: white;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    header nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 14px;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* 2. Main Content (Konten Utama) */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 4px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .form-group input:focus, 
+    .form-group select:focus {
+      border-color: #00bcd4;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* 3. Footer */
+    footer {
+      background-color: #00bcd4;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bagian 1: Header -->
+  <header>
+    <div class="logo">My App UTS</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Bagian 2: Konten Utama (Main) -->
+  <main>
+    <div class="card">
+      <h2>Operasi Matematika dengan JavaScript</h2>
+      
+      <div class="form-group">
+        <label for="angka1">Angka Pertama</label>
+        <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+      </div>
+
+      <div class="form-group">
+        <label for="angka2">Angka Kedua</label>
+        <input type="number" id="angka2" placeholder="Masukkan angka kedua">
+      </div>
+
+      <div class="form-group">
+        <label for="operasi">Operasi</label>
+        <select id="operasi">
+          <option value="penjumlahan">Penjumlahan (+)</option>
+          <option value="pengurangan">Pengurangan (-)</option>
+          <option value="perkalian">Perkalian (×)</option>
+          <option value="pembagian">Pembagian (÷)</option>
+        </select>
+      </div>
+
+      <button onclick="hitung()">Hitung</button>
+
+      <div id="result"></div>
+    </div>
+  </main>
+
+  <!-- Bagian 3: Footer -->
+  <footer>
+    &copy; 2026 My App. All Rights Reserved.
+  </footer>
+
+  <!-- Logika JavaScript -->
+  <script>
+    function hitung() {
+      const input1 = parseFloat(document.getElementById('angka1').value);
+      const input2 = parseFloat(document.getElementById('angka2').value);
+      const operasi = document.getElementById('operasi').value;
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(input1) || isNaN(input2)) {
+        resultDiv.style.color = 'red';
+        resultDiv.textContent = 'Harap masukkan kedua angka!';
+        return;
+      }
+
+      let hasil = 0;
+
+      switch (operasi) {
+        case 'penjumlahan':
+          hasil = input1 + input2;
+          break;
+        case 'pengurangan':
+          hasil = input1 - input2;
+          break;
+        case 'perkalian':
+          hasil = input1 * input2;
+          break;
+        case 'pembagian':
+          if (input2 === 0) {
+            resultDiv.style.color = 'red';
+            resultDiv.textContent = 'Tidak dapat membagi dengan angka nol (0)!';
+            return;
+          }
+          hasil = input1 / input2;
+          break;
+        default:
+          hasil = 0;
+      }
+
+      resultDiv.style.color = '#333';
+      resultDiv.textContent = 'Hasil: ' + hasil;
+    }
+  </script>
+
+</body>
+</html>
